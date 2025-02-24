@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/KinematicCharacterController/Examples/Scenes/CharacterPlayground.unity
+- path: Assets/Brick Project Studio/Apartment Kit/Scenes/Scene_02.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
