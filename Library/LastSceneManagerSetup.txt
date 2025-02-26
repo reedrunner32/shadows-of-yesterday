@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/KinematicCharacterController/Examples/Scenes/CharacterPlayground.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
