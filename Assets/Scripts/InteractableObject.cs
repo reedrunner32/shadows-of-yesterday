@@ -1,39 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour
+public class PickableObject : MonoBehaviour, IInteractable
 {
-    private Material originalMaterial;
-    public Material glowMaterial; // Assign a yellow-glow material in the inspector
-    private bool isHovered = false;
+    private Renderer objRenderer;
+    private Color originalColor;
+    private Material objMaterial;
 
     void Start()
     {
-        originalMaterial = GetComponent<Renderer>().material;
-    }
-
-    void Update()
-    {
-        if (isHovered && Input.GetKeyDown(KeyCode.E))
+        objRenderer = GetComponent<Renderer>();
+        if (objRenderer != null)
         {
-            PickUpObject();
+            objMaterial = objRenderer.material;
+            originalColor = objMaterial.color;
+
+            // Ensure the material supports emission
+            objMaterial.EnableKeyword("_EMISSION");
+            objMaterial.SetColor("_EmissionColor", Color.black); // No glow initially
         }
     }
 
-    public void OnHoverEnter()
+    public void Interact()
     {
-        GetComponent<Renderer>().material = glowMaterial;
-        isHovered = true;
+        Debug.Log("Picked up " + gameObject.name);
+        gameObject.SetActive(false);
     }
 
-    public void OnHoverExit()
+    public void OnHover(bool isLooking)
     {
-        GetComponent<Renderer>().material = originalMaterial;
-        isHovered = false;
-    }
-
-    private void PickUpObject()
-    {
-        Debug.Log("Object Picked Up: " + gameObject.name);
-        gameObject.SetActive(false); // Hide object (adjust based on your pickup system)
+        if (objMaterial != null)
+        {
+            if (isLooking)
+            {
+                objMaterial.SetColor("_EmissionColor", Color.yellow * 0.3f); // Subtle yellow glow
+            }
+            else
+            {
+                objMaterial.SetColor("_EmissionColor", Color.black); // Remove glow
+            }
+        }
     }
 }
