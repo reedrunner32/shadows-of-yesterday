@@ -8,6 +8,9 @@ public class PickableObject : MonoBehaviour, IInteractable
     private Color originalColor;
     private Material objMaterial;
     private GameManager gameManager;
+    public AudioClip pickupSound;
+    private AudioSource audioSource;
+    public float volume = 0.5f;
 
     void Start()
     {
@@ -25,6 +28,11 @@ public class PickableObject : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        if (pickupSound != null) {
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
+        }
+
         Debug.Log("Picked up " + gameObject.name);
         gameObject.SetActive(false);
         gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
