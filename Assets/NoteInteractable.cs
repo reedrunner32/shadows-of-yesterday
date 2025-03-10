@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class NoteInteract : MonoBehaviour, IInteractable
@@ -13,6 +12,9 @@ public class NoteInteract : MonoBehaviour, IInteractable
 
     // NPC reference (only needed for the note)
     public NPCMovement npc;
+
+    // Reference to the door script
+    public SojaExiles.opencloseDoor doorScript;
 
     void Start()
     {
@@ -48,6 +50,17 @@ public class NoteInteract : MonoBehaviour, IInteractable
         {
             Debug.Log("✅ NPC reference found! Triggering NPC appearance.");
             npc.Appear();
+        }
+
+        // Open the door if referenced
+        if (doorScript != null)
+        {
+            Debug.Log("🚪 Door reference found! Toggling door.");
+            doorScript.ToggleDoor();
+        }
+        else
+        {
+            Debug.LogError("❌ ERROR: No door script reference found!");
         }
 
         // Remove glow effect
