@@ -37,7 +37,7 @@ public class PickableObject : MonoBehaviour, IInteractable
         }
 
         Debug.Log("Picked up " + gameObject.name);
-        //gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
+        gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
         
         // Trigger the Interact event
         OnInteract?.Invoke(gameObject);

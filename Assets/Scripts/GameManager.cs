@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         
         if (collectedItems >= totalItems)
         {
-            LoadNextScene();
+            Invoke("LoadNextScene", 2f);
         }
     }
 
