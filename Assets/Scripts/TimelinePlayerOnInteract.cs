@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 public class TimelinePlayerOnInteract : MonoBehaviour
 {
     public PlayableDirector timelineDirector; // Reference to the Timeline's PlayableDirector
+    public GameObject lightSource;
 
     private void OnEnable()
     {
@@ -22,6 +23,7 @@ public class TimelinePlayerOnInteract : MonoBehaviour
         // Check if the interacted object is the one this script is attached to
         if (interactedObject == gameObject && timelineDirector != null)
         {
+            lightSource.SetActive(false);
             timelineDirector.Play();
         }
     }
