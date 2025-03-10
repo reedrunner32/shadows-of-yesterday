@@ -7,21 +7,24 @@ public class NPCMovement : MonoBehaviour
     private int currentWaypointIndex = 0;
     private NavMeshAgent agent;
     private bool hasStarted = false;
-    private bool wasLooking = false; // Track if player was previously looking
+    private bool wasLooking = false;
+    private bool hasAppeared = false; // NPC only appears after note interaction
 
-    // Event to notify when the player starts looking at the NPC
     public delegate void OnPlayerStartLooking();
     public static event OnPlayerStartLooking PlayerStartLooking;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.isStopped = true; // Start with movement disabled
+        agent.isStopped = true; 
+        gameObject.SetActive(false); // Hide NPC until the note is clicked
     }
 
     void Update()
     {
-        Transform cam = Camera.main?.transform; // Ensure there's a main camera
+        if (!hasAppeared) return; // NPC does nothing until it has appeared
+
+        Transform cam = Camera.main?.transform;
 
         if (cam == null)
         {
@@ -31,25 +34,23 @@ public class NPCMovement : MonoBehaviour
 
         bool isLooking = IsCameraLookingAtNPC(cam);
 
-        // Raise event when the player starts looking
         if (isLooking && !wasLooking)
         {
             Debug.Log("Player is looking at the NPC.");
-            PlayerStartLooking?.Invoke(); // Notify listeners
+            PlayerStartLooking?.Invoke();
         }
-        wasLooking = isLooking; // Update tracking
+        wasLooking = isLooking;
 
         if (isLooking)
         {
             if (!hasStarted)
             {
-                hasStarted = true; // Start movement on first look
+                hasStarted = true;
                 agent.SetDestination(waypoints[currentWaypointIndex].position);
             }
 
-            agent.isStopped = false; // Resume movement
+            agent.isStopped = false;
 
-            // Move to next waypoint if close enough
             if (!agent.pathPending && agent.remainingDistance < 0.5f)
             {
                 currentWaypointIndex++;
@@ -60,29 +61,49 @@ public class NPCMovement : MonoBehaviour
                 }
                 else
                 {
-                    Disappear(); // NPC disappears at the last waypoint
+                    Disappear();
                 }
             }
         }
         else
         {
-            agent.isStopped = true; // Pause movement when not looked at
+            agent.isStopped = true;
         }
     }
 
     bool IsCameraLookingAtNPC(Transform cam)
     {
         Vector3 directionToNPC = (transform.position - cam.position).normalized;
-        Vector3 cameraForward = cam.forward;
-
-        float dotProduct = Vector3.Dot(cameraForward, directionToNPC);
-
-        return dotProduct > 0.7f; // Adjust threshold for sensitivity
+        float dotProduct = Vector3.Dot(cam.forward, directionToNPC);
+        return dotProduct > 0.7f;
     }
 
     void Disappear()
     {
         Debug.Log("NPC reached the last waypoint and disappeared.");
-        gameObject.SetActive(false); // Hide NPC (Use Destroy(gameObject) to remove it)
+        gameObject.SetActive(false);
+    }
+
+    public void Appear()
+    {
+        Debug.Log("👀 NPC Appear() called! Attempting to activate NPC...");
+
+        gameObject.SetActive(true);
+        hasAppeared = true;
+
+        Debug.Log("NPC Active State: " + gameObject.activeSelf);
+
+        // Find SkinnedMeshRenderer inside child objects (Mixamo models)
+        SkinnedMeshRenderer npcRenderer = GetComponentInChildren<SkinnedMeshRenderer>(true);
+
+        if (npcRenderer != null)
+        {
+            npcRenderer.enabled = true; // Ensure visibility
+            Debug.Log("🎭 NPC Renderer Found and Enabled!");
+        }
+        else
+        {
+            Debug.LogError("❌ ERROR: SkinnedMeshRenderer is still missing! Check child objects.");
+        }
     }
 }
