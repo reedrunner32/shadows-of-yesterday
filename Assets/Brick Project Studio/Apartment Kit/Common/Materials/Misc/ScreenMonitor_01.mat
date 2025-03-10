@@ -12,10 +12,16 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
   m_LightmapFlags: 1
+=======
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+>>>>>>> Stashed changes
 =======
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -27,7 +33,11 @@ Material:
   stringTagMap: {}
   disabledShaderPasses: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LockedProperties: _BumpMap
+=======
+  m_LockedProperties: 
+>>>>>>> Stashed changes
 =======
   m_LockedProperties: 
 >>>>>>> Stashed changes
@@ -93,6 +103,9 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
 =======
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
