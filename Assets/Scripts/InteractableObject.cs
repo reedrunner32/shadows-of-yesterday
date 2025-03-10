@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PickableObject : MonoBehaviour, IInteractable
@@ -11,6 +10,9 @@ public class PickableObject : MonoBehaviour, IInteractable
     public AudioClip pickupSound;
     private AudioSource audioSource;
     public float volume = 0.5f;
+
+    // Define a static event for interaction
+    public static event Action<GameObject> OnInteract;
 
     void Start()
     {
@@ -28,14 +30,18 @@ public class PickableObject : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
-        if (pickupSound != null) {
+        // Play the pickup sound
+        if (pickupSound != null)
+        {
             AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
         }
 
         Debug.Log("Picked up " + gameObject.name);
+        //gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
+        
+        // Trigger the Interact event
+        OnInteract?.Invoke(gameObject);
         gameObject.SetActive(false);
-        gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
     }
 
     public void OnHover(bool isLooking)
