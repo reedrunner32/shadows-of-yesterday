@@ -15,6 +15,7 @@ public class NoteInteract : MonoBehaviour, IInteractable
 
     // Reference to the door script
     public SojaExiles.opencloseDoor doorScript;
+    public GameObject doorCollider;
 
     void Start()
     {
@@ -61,6 +62,11 @@ public class NoteInteract : MonoBehaviour, IInteractable
         else
         {
             Debug.LogError("❌ ERROR: No door script reference found!");
+        }
+
+        if (doorCollider != null)
+        {
+            doorCollider.SetActive(true);
         }
 
         // Remove glow effect
