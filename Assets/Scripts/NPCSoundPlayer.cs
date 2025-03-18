@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class NPCSoundPlayer : MonoBehaviour
 {
     public AudioClip lookSound; // Sound to play when the player looks at the NPC
+    public AudioSource audioSource_music;
     private AudioSource audioSource; // Reference to the AudioSource component
 
     void Start()
@@ -35,10 +37,17 @@ public class NPCSoundPlayer : MonoBehaviour
         if (lookSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(lookSound); // Play the sound through the AudioSource
+            StartCoroutine(PlayUnsettlingMusic());
         }
         else
         {
             Debug.LogWarning("Look sound or AudioSource is missing!");
         }
+    }
+
+    IEnumerator PlayUnsettlingMusic()
+    {
+        yield return new WaitForSeconds(0.8f);
+        audioSource_music.Play();
     }
 }
