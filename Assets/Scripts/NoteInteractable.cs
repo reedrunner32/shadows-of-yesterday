@@ -28,7 +28,7 @@ public class NoteInteract : MonoBehaviour, IInteractable
             originalColor = objMaterial.color;
 
             objMaterial.EnableKeyword("_EMISSION");
-            objMaterial.SetColor("_EmissionColor", Color.black); // No glow initially
+            objMaterial.SetColor("_EmissionColor", originalColor); // No glow initially
         }
 
         // Ensure AudioSource is available
@@ -72,7 +72,7 @@ public class NoteInteract : MonoBehaviour, IInteractable
         // Remove glow effect
         if (objMaterial != null)
         {
-            objMaterial.SetColor("_EmissionColor", Color.black);
+            objMaterial.SetColor("_EmissionColor", originalColor);
         }
 
         // Now disable the object
@@ -93,7 +93,7 @@ public class NoteInteract : MonoBehaviour, IInteractable
     {
         if (objMaterial != null)
         {
-            objMaterial.SetColor("_EmissionColor", isLooking ? Color.yellow * 0.3f : Color.black);
+            objMaterial.SetColor("_EmissionColor", isLooking ? Color.yellow * 0.3f : originalColor);
         }
     }
 }
