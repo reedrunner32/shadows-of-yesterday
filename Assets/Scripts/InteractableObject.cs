@@ -7,39 +7,61 @@ public class PickableObject : MonoBehaviour, IInteractable
     private Color originalColor;
     private Material objMaterial;
     private GameManager gameManager;
+
     public AudioClip pickupSound;
     private AudioSource audioSource;
     public float volume = 0.5f;
 
-    // Define a static event for interaction
+    [TextArea(2, 5)]
+    public string[] subtitleLines;
+
+    // 👇 Assign the correct manager per object in Inspector (can be any MonoBehaviour that has ShowSubtitleSequence)
+    public MonoBehaviour subtitleManager; // Reference to any custom manager
+    private Action<string[]> subtitleTrigger;
+
     public static event Action<GameObject> OnInteract;
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         objRenderer = GetComponent<Renderer>();
+
         if (objRenderer != null)
         {
             objMaterial = objRenderer.material;
             originalColor = objMaterial.color;
 
             objMaterial.EnableKeyword("_EMISSION");
-            objMaterial.SetColor("_EmissionColor", Color.black); // No glow initially
+            objMaterial.SetColor("_EmissionColor", Color.black);
+        }
+
+        // Try to cache ShowSubtitleSequence if the manager has it
+        if (subtitleManager != null)
+        {
+            var method = subtitleManager.GetType().GetMethod("ShowSubtitleSequence");
+            if (method != null)
+            {
+                subtitleTrigger = (lines) => method.Invoke(subtitleManager, new object[] { lines });
+            }
         }
     }
 
     public void Interact()
     {
-        // Play the pickup sound
         if (pickupSound != null)
         {
             AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
         }
 
         Debug.Log("Picked up " + gameObject.name);
-        gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
-        
-        // Trigger the Interact event
+        gameManager?.ObjectCollected();
+
+        // ✅ Trigger that object's custom subtitle manager
+        if (subtitleLines != null && subtitleLines.Length > 0 && subtitleTrigger != null)
+        {
+            subtitleTrigger.Invoke(subtitleLines);
+        }
+
         OnInteract?.Invoke(gameObject);
         gameObject.SetActive(false);
     }
@@ -48,14 +70,7 @@ public class PickableObject : MonoBehaviour, IInteractable
     {
         if (objMaterial != null)
         {
-            if (isLooking)
-            {
-                objMaterial.SetColor("_EmissionColor", Color.yellow * 0.3f); // Subtle yellow glow
-            }
-            else
-            {
-                objMaterial.SetColor("_EmissionColor", Color.black); // Remove glow
-            }
+            objMaterial.SetColor("_EmissionColor", isLooking ? Color.yellow * 0.3f : Color.black);
         }
     }
 }

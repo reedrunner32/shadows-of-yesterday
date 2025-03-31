@@ -6,37 +6,49 @@ public class InteractableRadio : MonoBehaviour, IInteractable
     private Renderer objRenderer;
     private Material objMaterial;
     private GameManager gameManager;
-    public AudioClip pickupSound;
     private AudioSource audioSource;
+
+    public AudioClip pickupSound;
     public float volume = 0.5f;
 
-    // Define a static event for interaction
+    public string[] subtitleLines; // ✅ Subtitles specific to the radio
+    public MonoBehaviour subtitleManager; // ✅ Drag in your SubtitleManagerRadio (must have ShowSubtitleSequence)
+
     public static event Action<GameObject> OnInteract;
 
-    // Flag to track if the interaction has already occurred
     private bool hasInteracted = false;
+    private Action<string[]> subtitleTrigger;
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         objRenderer = GetComponent<Renderer>();
         audioSource = GetComponent<AudioSource>();
+
         if (objRenderer != null)
         {
             objMaterial = objRenderer.material;
-
             objMaterial.EnableKeyword("_EMISSION");
-            objMaterial.SetColor("_EmissionColor", Color.black); // No glow initially
+            objMaterial.SetColor("_EmissionColor", Color.black);
+        }
+
+        // Cache the subtitle trigger if the method exists
+        if (subtitleManager != null)
+        {
+            var method = subtitleManager.GetType().GetMethod("ShowSubtitleSequence");
+            if (method != null)
+            {
+                subtitleTrigger = (lines) => method.Invoke(subtitleManager, new object[] { lines });
+            }
         }
     }
 
     public void Interact()
     {
-
         if (hasInteracted) return;
 
         // Play the pickup sound
-        if (pickupSound != null)
+        if (pickupSound != null && audioSource != null)
         {
             audioSource.clip = pickupSound;
             audioSource.loop = false;
@@ -44,28 +56,25 @@ public class InteractableRadio : MonoBehaviour, IInteractable
             audioSource.Play();
         }
 
-        gameManager.ObjectCollected(); // Keeps track of how many objects we have picked up
+        gameManager?.ObjectCollected();
 
-        // Trigger the Interact event
+        // ✅ Trigger subtitle playback if available
+        if (subtitleLines != null && subtitleLines.Length > 0 && subtitleTrigger != null)
+        {
+            subtitleTrigger.Invoke(subtitleLines);
+        }
+
         OnInteract?.Invoke(gameObject);
         hasInteracted = true;
-        objMaterial.SetColor("_EmissionColor", Color.black); // remove glow
+
+        if (objMaterial != null)
+            objMaterial.SetColor("_EmissionColor", Color.black);
     }
 
     public void OnHover(bool isLooking)
     {
-        if (hasInteracted) return;
+        if (hasInteracted || objMaterial == null) return;
 
-        if (objMaterial != null)
-        {
-            if (isLooking)
-            {
-                objMaterial.SetColor("_EmissionColor", Color.yellow * 0.3f); // Subtle yellow glow
-            }
-            else
-            {
-                objMaterial.SetColor("_EmissionColor", Color.black); // Remove glow
-            }
-        }
+        objMaterial.SetColor("_EmissionColor", isLooking ? Color.yellow * 0.3f : Color.black);
     }
 }
