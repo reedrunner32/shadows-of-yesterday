@@ -11,6 +11,7 @@ public class KeyPickup : MonoBehaviour
 
     void Update()
     {
+        doorLight.enabled = false;
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Key picked up!");
