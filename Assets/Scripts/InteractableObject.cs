@@ -57,9 +57,9 @@ public class PickableObject : MonoBehaviour, IInteractable
         gameManager?.ObjectCollected();
 
         // ✅ Trigger that object's custom subtitle manager
-        if (subtitleLines != null && subtitleLines.Length > 0 && subtitleTrigger != null)
+        if (subtitleLines != null && subtitleLines.Length > 0)
         {
-            subtitleTrigger.Invoke(subtitleLines);
+            SubtitleManagerInteractives.Instance.ShowSubtitleSequence(subtitleLines);
         }
 
         OnInteract?.Invoke(gameObject);

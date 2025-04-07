@@ -59,9 +59,9 @@ public class InteractableRadio : MonoBehaviour, IInteractable
         gameManager?.ObjectCollected();
 
         // ✅ Trigger subtitle playback if available
-        if (subtitleLines != null && subtitleLines.Length > 0 && subtitleTrigger != null)
+        if (subtitleLines != null && subtitleLines.Length > 0)
         {
-            subtitleTrigger.Invoke(subtitleLines);
+            SubtitleManagerInteractives.Instance.ShowSubtitleSequence(subtitleLines);
         }
 
         OnInteract?.Invoke(gameObject);
