@@ -1259,7 +1259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &112947947
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5820,7 +5820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &524408625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12036,6 +12036,8 @@ MonoBehaviour:
   - {fileID: 1348985317}
   door: {fileID: 1272804998}
   doorLight: {fileID: 725268493}
+  npc1: {fileID: 112947945}
+  npc2: {fileID: 524408624}
 --- !u!135 &1247938071
 SphereCollider:
   m_ObjectHideFlags: 0

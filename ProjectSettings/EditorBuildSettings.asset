@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HospitalScene.unity
     guid: 0ac646fa922618e408ce42692fdb6b01
+  - enabled: 1
+    path: Assets/Scenes/MorgueScene.unity
+    guid: 032de527003290240b2a336d884d911f
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: f66930e94d6394b4397466dcf0d12d22
   m_configObjects: {}
