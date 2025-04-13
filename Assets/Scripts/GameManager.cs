@@ -64,6 +64,6 @@ public class GameManager : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene("ToBeContinued"); // Change this in the future when we arent in beta test or if we have car scene ready
+        SceneManager.LoadScene("HospitalScene"); // Change this in the future when we arent in beta test or if we have car scene ready
     }
 }

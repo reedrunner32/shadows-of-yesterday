@@ -6,6 +6,8 @@ public class KeyPickup : MonoBehaviour
     public GameObject[] lightsToTurnOff;
     public GameObject door;
     public Light doorLight;
+    public GameObject npc1;
+    public GameObject npc2;
 
     private bool isPlayerNearby = false;
 
@@ -15,6 +17,9 @@ public class KeyPickup : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Key picked up!");
+
+            npc1.SetActive(false);
+            npc2.SetActive(false);
 
             // Turn off lights (get Light components from GameObjects)
             foreach (GameObject lightObj in lightsToTurnOff)

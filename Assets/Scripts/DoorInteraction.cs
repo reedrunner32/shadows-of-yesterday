@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorInteraction : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class DoorInteraction : MonoBehaviour
         {
             // Do whatever opening means (e.g. animation, disable collider, etc)
             Debug.Log("Door opened!");
-            // Example: gameObject.SetActive(false);
+            SceneManager.LoadScene("MorgueScene");
         }
     }
 
