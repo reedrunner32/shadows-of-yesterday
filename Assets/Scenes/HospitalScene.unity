@@ -5838,7 +5838,7 @@ MonoBehaviour:
   - {fileID: 1343950043}
   player: {fileID: 653808481}
   visionRange: 10
-  visionAngle: 60
+  visionAngle: 45
   chaseSpeed: 3
   patrolSpeed: 2
   loseSightTime: 3
@@ -9113,7 +9113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.11
+      value: -29.960001
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9561,7 +9561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.482
+      value: -24.332
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11000,7 +11000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.294
+      value: -27.144001
       objectReference: {fileID: 0}
     - target: {fileID: 8257532869840100450, guid: e453c133b24c04045a61fd8546bc4e40, type: 3}
       propertyPath: m_LocalPosition.y
