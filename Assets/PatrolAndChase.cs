@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PatrolAndChase : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class PatrolAndChase : MonoBehaviour
             case State.Chasing:
                 if (player != null)
                     agent.SetDestination(player.position);
+                if (Vector3.Distance(transform.position, player.position) <= 1.5f)
+                {
+                    Debug.Log("💥 Reached player! Reloading scene...");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
                 if (!CanSeePlayer())
                 {
                     timeSinceSeenPlayer += Time.deltaTime;
@@ -146,7 +152,7 @@ bool CanSeePlayer()
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("You were found!");
-            // You could reload the scene, stop the game, trigger jumpscare, etc.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
