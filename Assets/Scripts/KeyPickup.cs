@@ -8,6 +8,9 @@ public class KeyPickup : MonoBehaviour
     public Light doorLight;
     public GameObject npc1;
     public GameObject npc2;
+    public GameObject npc3;
+    public GameObject npc4;
+    public GameObject npc5;
 
     private bool isPlayerNearby = false;
 
@@ -20,6 +23,9 @@ public class KeyPickup : MonoBehaviour
 
             npc1.SetActive(false);
             npc2.SetActive(false);
+            npc3.SetActive(false);
+            npc4.SetActive(false);
+            npc5.SetActive(false);
 
             // Turn off lights (get Light components from GameObjects)
             foreach (GameObject lightObj in lightsToTurnOff)

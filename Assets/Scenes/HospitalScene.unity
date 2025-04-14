@@ -12263,6 +12263,9 @@ MonoBehaviour:
   doorLight: {fileID: 725268493}
   npc1: {fileID: 112947945}
   npc2: {fileID: 524408624}
+  npc3: {fileID: 1898375935}
+  npc4: {fileID: 1270660673}
+  npc5: {fileID: 0}
 --- !u!135 &1247938071
 SphereCollider:
   m_ObjectHideFlags: 0
