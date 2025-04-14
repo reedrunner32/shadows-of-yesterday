@@ -5834,8 +5834,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoints:
-  - {fileID: 128408650}
   - {fileID: 505606405}
+  - {fileID: 128408650}
   player: {fileID: 653808481}
   visionRange: 15
   visionAngle: 60
