@@ -1,14 +1,40 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class CrashEventSender : MonoBehaviour
 {
-    public FirstPersonCamera controller; // drag this in from inspector
+    public PlayerCar script;
+    public Image whiteFadeImage;
 
-    void OnCollisionEnter(Collision collision)
+    public float duration = 2f;
+
+    void OnTriggerEnter(Collider other)
     {
-        if (controller != null)
+        if (other.CompareTag("Player"))
         {
-            controller.controlsEnabled = false;
+            script.startCrashEvent();
+            StartCoroutine(Fade());
         }
     }
+
+    IEnumerator Fade()
+    {
+        float timer = 0f;
+
+        Color color = whiteFadeImage.color;
+        color = Color.white;
+        color.a = 0f;
+        whiteFadeImage.color = color;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0f, 1f, timer / duration);
+            whiteFadeImage.color = color;
+            yield return null;
+        }
+    }
+
 }

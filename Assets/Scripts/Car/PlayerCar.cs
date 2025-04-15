@@ -27,6 +27,9 @@ public class PlayerCar : MonoBehaviour
     public FirstPersonCamera firstPersonCamera;
     public AudioSource carAmbience;
 
+    public GameObject crashTarget; // Target to move towards on crashEvent
+    public bool crashEvent = false; // made public for external triggering
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,6 +44,7 @@ public class PlayerCar : MonoBehaviour
         if (swayIncreaseTimer >= swayIncreaseInterval)
         {
             swayAmount += 0.02f;
+            forwardSpeed += 0.1f;
             swayIncreaseTimer = 0f;
         }
     }
@@ -48,6 +52,14 @@ public class PlayerCar : MonoBehaviour
     void FixedUpdate()
     {
         if (hasCollided) return;
+
+        if (crashEvent && crashTarget != null)
+        {
+            // Disable sway and go directly toward the crash target
+            Vector3 direction = (crashTarget.transform.position - transform.position).normalized;
+            rb.velocity = direction * forwardSpeed;
+            return;
+        }
 
         swayTimer += Time.fixedDeltaTime;
 
@@ -67,6 +79,7 @@ public class PlayerCar : MonoBehaviour
 
         rb.velocity = forward + lateral;
     }
+
 
     void ScheduleNextSway()
     {
@@ -119,5 +132,11 @@ public class PlayerCar : MonoBehaviour
     void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void startCrashEvent()
+    {
+        firstPersonCamera.disableControls();
+        crashEvent = true;
     }
 }

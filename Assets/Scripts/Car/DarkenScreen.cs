@@ -6,49 +6,29 @@ using UnityEngine.UI;
 public class DarkenScreen : MonoBehaviour
 {
     public RawImage fadeImage;
-    public float fadeInDuration = 10f;
-    public float fadeOutDuration = 2f;
-
-    private float timer = 0f;
-    private bool fadingIn = true;
-    private Color color;
+    public Transform objectA;
+    public Transform objectB;
+    public float startDistance = 100f; // The distance at which alpha = 0
+    public float endDistance = 1f;    // The distance at which alpha = 0.9
 
     void Start()
     {
-        color = fadeImage.color;
-        color.a = 0f;
-        fadeImage.color = color;
+        startDistance = Vector3.Distance(objectA.position, objectB.position);
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
+        float currentDistance = Vector3.Distance(objectA.position, objectB.position);
 
-        if (fadingIn)
-        {
-            float t = timer / fadeInDuration;
-            color.a = Mathf.Lerp(0f, 0.7f, t);
-            fadeImage.color = color;
+        // Clamp the distance within the start and end range
+        float clampedDistance = Mathf.Clamp(currentDistance, endDistance, startDistance);
 
-            if (t >= 1f)
-            {
-                // Start fading out
-                fadingIn = false;
-                timer = 0f;
-            }
-        }
-        else
-        {
-            float t = timer / fadeOutDuration;
-            color.a = Mathf.Lerp(0.7f, 0f, t);
-            fadeImage.color = color;
+        // Calculate how far we've progressed from startDistance to endDistance
+        float t = 1f - ((clampedDistance - endDistance) / (startDistance - endDistance)); // Normalized ratio
+        float alpha = Mathf.Lerp(0f, 0.9f, t);
 
-            if (t >= 1f)
-            {
-                // Reset to fade in again if needed
-                fadingIn = true;
-                timer = 0f;
-            }
-        }
+        Color color = fadeImage.color;
+        color.a = alpha;
+        fadeImage.color = color;
     }
 }
