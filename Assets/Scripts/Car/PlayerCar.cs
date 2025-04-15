@@ -1,0 +1,123 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
+
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerCar : MonoBehaviour
+{
+    public float forwardSpeed = 5f;
+    public float swaySpeed = 1.5f;
+    public float swayAmount = 0.5f;
+    public float minTimeBetweenSways = 1f;
+    public float maxTimeBetweenSways = 3f;
+
+    public Image whiteFadeImage; // Assign in Inspector
+
+    private Rigidbody rb;
+    private float swayTimer;
+    private float nextSwayTime;
+    private float targetSway = 0f;
+    private float currentSway = 0f;
+
+    private float swayIncreaseTimer = 0f;
+    private float swayIncreaseInterval = 1f;
+
+    private bool hasCollided = false;
+    public FirstPersonCamera firstPersonCamera;
+    public AudioSource carAmbience;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        ScheduleNextSway();
+    }
+
+    void Update()
+    {
+        if (hasCollided) return;
+
+        swayIncreaseTimer += Time.deltaTime;
+        if (swayIncreaseTimer >= swayIncreaseInterval)
+        {
+            swayAmount += 0.02f;
+            swayIncreaseTimer = 0f;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (hasCollided) return;
+
+        swayTimer += Time.fixedDeltaTime;
+
+        if (swayTimer >= nextSwayTime)
+        {
+            float dir = Random.value < 0.5f ? -1f : 1f;
+            targetSway = dir * swayAmount;
+
+            swayTimer = 0f;
+            ScheduleNextSway();
+        }
+
+        currentSway = Mathf.Lerp(currentSway, targetSway, Time.fixedDeltaTime * swaySpeed);
+
+        Vector3 forward = transform.forward * forwardSpeed;
+        Vector3 lateral = transform.right * currentSway;
+
+        rb.velocity = forward + lateral;
+    }
+
+    void ScheduleNextSway()
+    {
+        nextSwayTime = Random.Range(minTimeBetweenSways, maxTimeBetweenSways);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (hasCollided) return;
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            hasCollided = true;
+            rb.velocity = Vector3.zero;
+
+            if (whiteFadeImage != null)
+            {
+                firstPersonCamera.disableControls();
+                if (carAmbience != null) carAmbience.Stop();
+                StartCoroutine(FadeAndRestart());
+            }
+            else
+            {
+                Invoke(nameof(RestartScene), 2f);
+            }
+        }
+    }
+
+    IEnumerator FadeAndRestart()
+    {
+        float duration = 2f;
+        float timer = 0f;
+
+        Color color = whiteFadeImage.color;
+        color = Color.black;
+        color.a = 0f;
+        whiteFadeImage.color = color;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0f, 1f, timer / duration);
+            whiteFadeImage.color = color;
+            yield return null;
+        }
+
+        RestartScene();
+    }
+
+    void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+}
