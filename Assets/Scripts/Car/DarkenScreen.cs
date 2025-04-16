@@ -18,6 +18,7 @@ public class DarkenScreen : MonoBehaviour
 
     void Update()
     {
+
         float currentDistance = Vector3.Distance(objectA.position, objectB.position);
 
         // Clamp the distance within the start and end range
