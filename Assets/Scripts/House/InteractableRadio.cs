@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class InteractableRadio : MonoBehaviour, IInteractable
 {
@@ -7,6 +10,8 @@ public class InteractableRadio : MonoBehaviour, IInteractable
     private Material objMaterial;
     private GameManager gameManager;
     private AudioSource audioSource;
+    public float fadeDuration = 2f;
+    public RawImage fadeImage;
 
     public AudioClip pickupSound;
     public float volume = 0.5f;
@@ -43,6 +48,36 @@ public class InteractableRadio : MonoBehaviour, IInteractable
         }
     }
 
+    private IEnumerator LoadAfterDelay(string sceneName)
+    {
+        yield return new WaitForSeconds(28);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private IEnumerator FadeOutCoroutine()
+    {
+        yield return new WaitForSeconds(28 - fadeDuration);
+        float startVolume = audioSource.volume;
+
+        Color color = fadeImage.color;
+        color = Color.black;
+        color.a = 0f;
+        fadeImage.color = color;
+
+        float time = 0;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, 0f, time / fadeDuration);
+            color.a = Mathf.Lerp(0f, 1f, time / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        audioSource.volume = 0f;
+        audioSource.Stop();
+    }
+
     public void Interact()
     {
         if (hasInteracted) return;
@@ -69,6 +104,9 @@ public class InteractableRadio : MonoBehaviour, IInteractable
 
         if (objMaterial != null)
             objMaterial.SetColor("_EmissionColor", Color.black);
+
+        StartCoroutine(LoadAfterDelay("CarScene"));
+        StartCoroutine(FadeOutCoroutine());
     }
 
     public void OnHover(bool isLooking)

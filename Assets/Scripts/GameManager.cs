@@ -51,10 +51,10 @@ public class GameManager : MonoBehaviour
             lastItem = true;
         }
         
-        if (collectedItems >= totalItems)
-        {
-            Invoke("LoadNextScene", 28f);
-        }
+        //if (collectedItems >= totalItems)
+        //{
+        //    Invoke("LoadNextScene", 28f);
+        //}
     }
 
     private void UpdateUI()

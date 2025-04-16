@@ -35,6 +35,9 @@ public class CrashEventSender : MonoBehaviour
             whiteFadeImage.color = color;
             yield return null;
         }
+
+        // Trigger next scene
+
     }
 
 }
