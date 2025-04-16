@@ -36,7 +36,7 @@ public class CrashEventSender : MonoBehaviour
             yield return null;
         }
 
-        // Trigger next scene
+        SceneManager.LoadScene("HospitalScene");
 
     }
 
