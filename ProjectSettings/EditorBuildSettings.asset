@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HouseScene.unity
     guid: 03659cf1d2bbc87438ec8520ebc1ec7f
-  - enabled: 0
-    path: Assets/Scenes/ToBeContinued.unity
-    guid: eeef71b9e1d0ba340927dec042f15c7f
+  - enabled: 1
+    path: Assets/Scenes/CarScene.unity
+    guid: 5679868f7bf7a104e8a19eb726378da2
   - enabled: 1
     path: Assets/Scenes/HospitalScene.unity
     guid: 0ac646fa922618e408ce42692fdb6b01
@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: f66930e94d6394b4397466dcf0d12d22
-  - enabled: 1
-    path: Assets/Scenes/CarScene.unity
-    guid: 5679868f7bf7a104e8a19eb726378da2
   m_configObjects: {}
