@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: c5cfa53a9fddfd1459c478c4be1f6990
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bolder
+    second: {fileID: 2100000, guid: b2f42d6929d67074ebd57f1d1ec0b4f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dandelion
+    second: {fileID: 2100000, guid: d125eb53f9b07ab42a19912c66137ee7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 956fb101d17c94e479b611ce72b09559, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass2
+    second: {fileID: 2100000, guid: 1b4393da27d03f64eb4ac53a6bcf1170, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PIne
+    second: {fileID: 2100000, guid: a6070f49e0040124e80ff18e07d99405, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree1
+    second: {fileID: 2100000, guid: 24e5e97490888bd42bf8d24acae7d03a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree2
+    second: {fileID: 2100000, guid: ff656de4fbe3a384388ad544f4ba8f5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree3
+    second: {fileID: 2100000, guid: cafd35af8613dca4dbcbfb82c02d4ee8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree4
+    second: {fileID: 2100000, guid: 842e1c051d75d95449d231a7a9015b77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeCorwn3
+    second: {fileID: 2100000, guid: a2ceecc0ba1cf644f8b8854d4a3bc47a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeCorwn4
+    second: {fileID: 2100000, guid: 3de2e14108e96b14fbe6c7b3fe7ea578, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeCrown1
+    second: {fileID: 2100000, guid: 6d9ddc01c8c13704dbb9b31158c15eef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeCrown2
+    second: {fileID: 2100000, guid: 0534c277233573c4aadfd490d2098a79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeEnd
+    second: {fileID: 2100000, guid: 85dc6bf076cc41d4080c069b8cd81aa7, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Bark2_128px
+    second: {fileID: 2800000, guid: caa35f7102200454b8ab9ebc9385818e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Bark3_128px
+    second: {fileID: 2800000, guid: bdc1c7fe8163bcc4fb79421a79dd6d95, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Bark5_128px
+    second: {fileID: 2800000, guid: 47807d3ff088d7b4d85b0ab577dad063, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Bark6_128px
+    second: {fileID: 2800000, guid: 3ad11d27732b0b9488aec0a376092f86, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Bolder_128px
+    second: {fileID: 2800000, guid: 3a781d76a08936f4ca4fd2fd3e635aeb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Dandelion_64px
+    second: {fileID: 2800000, guid: 07452f95c424edf4ab1b87e8b6fa08c4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_Grass_128px
+    second: {fileID: 2800000, guid: b64bed8b8689fe04392e31359ce4a0a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_PINECone_64px
+    second: {fileID: 2800000, guid: 0057e5e393fa80e42b24dd7b89874c87, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeCrown1_128px
+    second: {fileID: 2800000, guid: cde363877d32440478b81dd426c156ba, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeCrown2_128px
+    second: {fileID: 2800000, guid: 669751d9ece744f4190606eb53f337fa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeCrown3_Tex_128px
+    second: {fileID: 2800000, guid: 556e11b3ab84d72479cbee0ab7d32056, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeCrown4_Tex_128px
+    second: {fileID: 2800000, guid: aac78470efd97984f9bf9489de10c0ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeEnd_64px
+    second: {fileID: 2800000, guid: f0f21e071e796a74099d6fdd8d671429, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSX_TreeInside_128px
+    second: {fileID: 2800000, guid: fe43569d9dbe9224da7fb83bb831eaf7, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -87,7 +87,12 @@ public class NoteInteract : MonoBehaviour, IInteractable
         {
             Debug.LogError("❌ ERROR: GameManager reference is missing!");
         }
-    }
+        SubtitleManagerInteractives.Instance.ShowSubtitleSequence(new string[] {
+            "Divorce?",
+            "Since when are we even at this point?",
+            "Did I miss something… or has something happened…"
+        });
+        }
 
     public void OnHover(bool isLooking)
     {
