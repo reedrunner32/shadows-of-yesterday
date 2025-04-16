@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: f66930e94d6394b4397466dcf0d12d22
+  - enabled: 1
+    path: Assets/Scenes/CarScene.unity
+    guid: 5679868f7bf7a104e8a19eb726378da2
   m_configObjects: {}
