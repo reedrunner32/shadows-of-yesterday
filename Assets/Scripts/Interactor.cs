@@ -36,7 +36,7 @@ public class Interactor : MonoBehaviour
 
                 lastHoveredObject = interactObj;
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     interactObj.Interact();
                 }
