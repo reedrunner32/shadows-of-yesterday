@@ -6,11 +6,11 @@ public class carSubtitleManager : MonoBehaviour
 {
     [Header("Subtitle Settings")]
     public TextMeshProUGUI carSubtitleText;
-    public float initialDelay = 0.7f;
-    public float baseDisplayTime = 0.8f;           // Reduced from 3f for quicker short lines
-    public float additionalTimePerCharacter = 0.02f; // Reduced from 0.05f for less length scaling
-    public float minimumDisplayTime = 0.5f;           // Reduced from 2f for very short lines
-    public float delayBetweenSubtitles = 0.2f;
+    public float initialDelay = 1.5f;
+    public float baseDisplayTime = 1.5f;           // Reduced from 3f for quicker short lines
+    public float additionalTimePerCharacter = 0.03f; // Reduced from 0.05f for less length scaling
+    public float minimumDisplayTime = 1f;           // Reduced from 2f for very short lines
+    public float delayBetweenSubtitles = 0.5f;
 
     [Header("Player Control References")]
     public MonoBehaviour playerCarMovementScript;
