@@ -14,6 +14,10 @@ public class FirstPersonCamera : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        if (SettingsManager.Instance != null)
+        {
+            sensitivity = SettingsManager.Instance.GetSensitivity();
+        }
     }
 
     void Update()
