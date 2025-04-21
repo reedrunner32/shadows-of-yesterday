@@ -26,6 +26,8 @@ public class PlayerCar : MonoBehaviour
     private bool hasCollided = false;
     public FirstPersonCamera firstPersonCamera;
     public AudioSource carAmbience;
+    public AudioSource wifeDialogue;
+    public AudioSource fatherDialogue;
 
     public GameObject crashTarget; // Target to move towards on crashEvent
     public bool crashEvent = false; // made public for external triggering
@@ -121,6 +123,8 @@ public class PlayerCar : MonoBehaviour
             {
                 firstPersonCamera.disableControls();
                 if (carAmbience != null) carAmbience.Stop();
+                if (wifeDialogue != null) wifeDialogue.Stop();
+                if (fatherDialogue != null) fatherDialogue.Stop();
                 StartCoroutine(FadeAndRestart());
             }
             else

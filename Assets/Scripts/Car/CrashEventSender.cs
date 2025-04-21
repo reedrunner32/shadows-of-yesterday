@@ -8,6 +8,7 @@ public class CrashEventSender : MonoBehaviour
     public PlayerCar script;
     public Image whiteFadeImage;
     public AudioSource horn;
+    public AudioSource wife;
 
     public float duration = 2f;
 
@@ -24,6 +25,7 @@ public class CrashEventSender : MonoBehaviour
     {
         horn.Play();
         float startVolume = horn.volume;
+        float wifeVolume = wife.volume;
 
         float timer = 0f;
 
@@ -35,6 +37,7 @@ public class CrashEventSender : MonoBehaviour
         while (timer < duration)
         {
             horn.volume = Mathf.Lerp(startVolume, 0f, timer / duration);
+            wife.volume = Mathf.Lerp(wifeVolume, 0f, timer / duration);
 
             timer += Time.deltaTime;
             color.a = Mathf.Lerp(0f, 1f, timer / duration);
