@@ -35,7 +35,6 @@ public class PickableObject : MonoBehaviour, IInteractable
             objMaterial.SetColor("_EmissionColor", Color.black);
         }
 
-        // Try to cache ShowSubtitleSequence if the manager has it
         if (subtitleManager != null)
         {
             var method = subtitleManager.GetType().GetMethod("ShowSubtitleSequence");
@@ -44,19 +43,24 @@ public class PickableObject : MonoBehaviour, IInteractable
                 subtitleTrigger = (lines) => method.Invoke(subtitleManager, new object[] { lines });
             }
         }
+
+        // Setup AudioSource for 2D sound
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0f; // 0 = 2D, 1 = 3D
+        audioSource.playOnAwake = false;
+        audioSource.volume = volume;
     }
 
     public void Interact()
     {
         if (pickupSound != null)
         {
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
+            Play2DSound(pickupSound, volume);
         }
 
         Debug.Log("Picked up " + gameObject.name);
         gameManager?.ObjectCollected();
 
-        // ✅ Trigger that object's custom subtitle manager
         if (subtitleLines != null && subtitleLines.Length > 0)
         {
             SubtitleManagerInteractives.Instance.ShowSubtitleSequence(subtitleLines);
@@ -64,6 +68,20 @@ public class PickableObject : MonoBehaviour, IInteractable
 
         OnInteract?.Invoke(gameObject);
         gameObject.SetActive(false);
+    }
+
+    private void Play2DSound(AudioClip clip, float vol)
+    {
+        GameObject tempGO = new GameObject("Temp2DAudio");
+        AudioSource tempSource = tempGO.AddComponent<AudioSource>();
+
+        tempSource.clip = clip;
+        tempSource.volume = vol;
+        tempSource.spatialBlend = 0f; // 👈 Fully 2D
+        tempSource.Play();
+
+        // Destroy after the clip finishes
+        Destroy(tempGO, clip.length);
     }
 
     public void OnHover(bool isLooking)
