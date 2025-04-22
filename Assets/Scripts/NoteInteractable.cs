@@ -31,9 +31,11 @@ public class NoteInteract : MonoBehaviour, IInteractable
             objMaterial.SetColor("_EmissionColor", originalColor); // No glow initially
         }
 
-        // Ensure AudioSource is available
+        // Setup AudioSource for 2D sound
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0f; // 0 = 2D, 1 = 3D
         audioSource.playOnAwake = false;
+        audioSource.volume = volume;
     }
 
     public void Interact()
@@ -43,7 +45,7 @@ public class NoteInteract : MonoBehaviour, IInteractable
         // Play pickup sound
         if (pickupSound != null)
         {
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position, volume);
+            Play2DSound(pickupSound, volume);
         }
 
         // If this object is linked to an NPC, make the NPC appear
@@ -93,6 +95,20 @@ public class NoteInteract : MonoBehaviour, IInteractable
             "Did I miss something… or has something happened…"
         });
         }
+
+    private void Play2DSound(AudioClip clip, float vol)
+    {
+        GameObject tempGO = new GameObject("Temp2DAudio");
+        AudioSource tempSource = tempGO.AddComponent<AudioSource>();
+
+        tempSource.clip = clip;
+        tempSource.volume = vol;
+        tempSource.spatialBlend = 0f; // 👈 Fully 2D
+        tempSource.Play();
+
+        // Destroy after the clip finishes
+        Destroy(tempGO, clip.length);
+    }
 
     public void OnHover(bool isLooking)
     {

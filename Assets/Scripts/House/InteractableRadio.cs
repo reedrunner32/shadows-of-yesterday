@@ -50,7 +50,7 @@ public class InteractableRadio : MonoBehaviour, IInteractable
 
     private IEnumerator LoadAfterDelay(string sceneName)
     {
-        yield return new WaitForSeconds(28);
+        yield return new WaitForSeconds(30);
         SceneManager.LoadScene(sceneName);
     }
 

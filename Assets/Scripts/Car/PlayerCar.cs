@@ -26,6 +26,8 @@ public class PlayerCar : MonoBehaviour
     private bool hasCollided = false;
     public FirstPersonCamera firstPersonCamera;
     public AudioSource carAmbience;
+    public AudioSource wifeDialogue;
+    public AudioSource fatherDialogue;
 
     public GameObject crashTarget; // Target to move towards on crashEvent
     public bool crashEvent = false; // made public for external triggering
@@ -49,20 +51,25 @@ public class PlayerCar : MonoBehaviour
         }
     }
 
+    // Add at top:
+    public float strafeAcceleration = 20f;
+    public float strafeDeceleration = 10f;
+    public float maxStrafeSpeed = 5f;
+    private float currentStrafeVelocity = 0f;
+
     void FixedUpdate()
     {
         if (hasCollided) return;
 
         if (crashEvent && crashTarget != null)
         {
-            // Disable sway and go directly toward the crash target
             Vector3 direction = (crashTarget.transform.position - transform.position).normalized;
             rb.velocity = direction * forwardSpeed;
             return;
         }
 
+        // Sway logic (optional or additive)
         swayTimer += Time.fixedDeltaTime;
-
         if (swayTimer >= nextSwayTime)
         {
             float dir = Random.value < 0.5f ? -1f : 1f;
@@ -71,14 +78,31 @@ public class PlayerCar : MonoBehaviour
             swayTimer = 0f;
             ScheduleNextSway();
         }
-
         currentSway = Mathf.Lerp(currentSway, targetSway, Time.fixedDeltaTime * swaySpeed);
 
+        // Input-based strafe
+        float inputX = Input.GetAxisRaw("Horizontal");
+
+        if (inputX != 0)
+        {
+            currentStrafeVelocity = Mathf.MoveTowards(currentStrafeVelocity, inputX * maxStrafeSpeed, strafeAcceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            currentStrafeVelocity = Mathf.MoveTowards(currentStrafeVelocity, 0f, strafeDeceleration * Time.fixedDeltaTime);
+        }
+
         Vector3 forward = transform.forward * forwardSpeed;
-        Vector3 lateral = transform.right * currentSway;
+        Vector3 lateral = transform.right * (currentSway + currentStrafeVelocity);
+
+        // Optional: Slight yaw (Y-axis) rotation for lean
+        float yawOffset = currentStrafeVelocity / maxStrafeSpeed * 10f;
+        Quaternion targetRotation = Quaternion.Euler(0f, yawOffset, 0f);
+        firstPersonCamera.playerBody.rotation = Quaternion.Slerp(firstPersonCamera.playerBody.rotation, targetRotation, Time.fixedDeltaTime * 5f);
 
         rb.velocity = forward + lateral;
     }
+
 
 
     void ScheduleNextSway()
@@ -99,6 +123,8 @@ public class PlayerCar : MonoBehaviour
             {
                 firstPersonCamera.disableControls();
                 if (carAmbience != null) carAmbience.Stop();
+                if (wifeDialogue != null) wifeDialogue.Stop();
+                if (fatherDialogue != null) fatherDialogue.Stop();
                 StartCoroutine(FadeAndRestart());
             }
             else
